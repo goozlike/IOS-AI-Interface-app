@@ -20,6 +20,21 @@ class VideoViewController: UIViewController, UINavigationControllerDelegate, UII
     }
     
     
+    
+    //включаем/выключаем обработку фотки
+    var work = false
+    @IBAction func startButton(_ sender: UIButton) {
+        
+        work = !work
+        
+        //меняем надпись на кнопке
+        if !work {
+            sender.setTitle("start", for: .normal)
+        } else {
+            sender.setTitle("stop", for: .normal)
+        }
+    }
+    
     //всякий калл для камеры в котором смысла особо нет
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
@@ -56,10 +71,16 @@ class VideoViewController: UIViewController, UINavigationControllerDelegate, UII
         let image = UIImage(cgImage: quartzImage)
         
         //вот тут мы делаем новую опенсв каритнку и присваеваем ее в имадж вью
-        let imageWithLaneOverlay = LaneDetectorBridge().detectLane(in: image)
+        if work {
+            let imageWithLaneOverlay = LaneDetectorBridge().detectLane(in: image)
         
-        DispatchQueue.main.async {
-            self.imageView.image = imageWithLaneOverlay
+            DispatchQueue.main.async {
+                self.imageView.image = imageWithLaneOverlay
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
         }
         //print("did receive frame")
     }
