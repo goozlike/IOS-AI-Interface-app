@@ -121,7 +121,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJQ-f5-oxf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1157.9710144927537" y="39.508928571428569"/>
+            <point key="canvasLocation" x="1918.840579710145" y="16.741071428571427"/>
         </scene>
         <!--Video View Controller-->
         <scene sceneID="G5m-T2-2uf">
@@ -132,7 +132,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErZ-dw-SX4">
-                                <rect key="frame" x="88" y="56" width="238" height="30"/>
+                                <rect key="frame" x="88" y="20" width="238" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="back"/>
                                 <connections>
@@ -140,9 +140,17 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GC-gw-uCg">
-                                <rect key="frame" x="0.0" y="94" width="414" height="667"/>
+                                <rect key="frame" x="0.0" y="58" width="414" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-Jj-QSK">
+                                <rect key="frame" x="136" y="748" width="142" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="start"/>
+                                <connections>
+                                    <action selector="startButton:" destination="NhC-z9-ePG" eventType="touchUpInside" id="278-2y-5B5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="X4R-F9-Pp6"/>
@@ -153,7 +161,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z20-2G-4cW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="970"/>
+            <point key="canvasLocation" x="476.81159420289856" y="969.64285714285711"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
