@@ -1,5 +1,5 @@
 //
-//  LaneDetectorBridge.m
+//  MatchingAlgorithmsBridge.mm
 //  project_app
 //
 //  Created by Никита Борисов on 30.03.2020.
@@ -9,12 +9,12 @@
 #import <opencv2/opencv.hpp>
 #import <opencv2/imgcodecs/ios.h>
 #import <Foundation/Foundation.h>
-#import "LaneDetectorBridge.h"
-#include "LaneDetector.hpp"
+#import "MatchingAlgorithmsBridge.h"
+#include "MatchingAlgorithms.hpp"
 
-@implementation LaneDetectorBridge
+@implementation MatchingAlgorithmsBridge
 
-- (UIImage *) detectLaneIn: (UIImage *) image {
+- (UIImage *) Match: (UIImage *) image {
     
     // convert uiimage to mat
     cv::Mat opencvImage;
@@ -25,8 +25,8 @@
     cv::cvtColor(opencvImage, convertedColorSpaceImage, CV_RGBA2RGB);
     
     // Run lane detection
-    LaneDetector laneDetector;
-    cv::Mat imageWithLaneDetected = laneDetector.detect_lane(convertedColorSpaceImage);
+    MatchingAlgorithms match;
+    cv::Mat imageWithMatches = match.matching(convertedColorSpaceImage);
     
     // convert mat to uiimage and return it to the caller
     return MatToUIImage(imageWithLaneDetected);
