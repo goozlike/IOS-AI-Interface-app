@@ -10,6 +10,8 @@
 using namespace cv;
 using namespace std;
 
+vector<pair<KeyPoint, Mat>> best_keypoints;
+
 int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
     vector<KeyPoint> keypoints_2;
     Mat descriptors_2;
@@ -53,7 +55,7 @@ int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoint
     return 0;
 }
 
-vector<pair<KeyPoint, Mat>> MatchingAlgorithms::best_points(Mat input_color) {
+int MatchingAlgorithms::best_points(Mat input_color) {
     Mat input;
     cvtColor(input_color, input, 0);
     map < std::pair<float, float>, std::pair<int, cv::Mat>>points;
@@ -101,7 +103,6 @@ vector<pair<KeyPoint, Mat>> MatchingAlgorithms::best_points(Mat input_color) {
     }
     int i = 0;
     multimap<int, tuple<float, float, Mat>>::iterator it = reverse_points.end();
-    vector<pair<KeyPoint, Mat>> best_keypoints;
     while (i < 20) {
         --it;
         Point2f p(get<0>(it->second), get<1>(it->second));
@@ -110,10 +111,10 @@ vector<pair<KeyPoint, Mat>> MatchingAlgorithms::best_points(Mat input_color) {
         ++i;
     }
 
-    return best_keypoints;
+    return 0;
 }
 
-pair<int, int> MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num, vector<pair<KeyPoint, Mat>> best_keypoints) {
+pair<int, int> MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num) {
     //преобразуем в чб
     Mat img;
     cvtColor(input_color, img, 0);
