@@ -10,9 +10,10 @@
 using namespace cv;
 using namespace std;
 
-vector<pair<KeyPoint, Mat>> best_keypoints;
+std::vector<std::pair<cv::KeyPoint, cv::Mat>> best_keypoints;
+cv::Mat img_color;
 
-int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
+int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
     vector<KeyPoint> keypoints_2;
     Mat descriptors_2;
     Ptr<ORB> orb = ORB::create();
@@ -37,7 +38,7 @@ int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoint
             if (dist > max_dist) max_dist = dist;
         }
 
-        //считаем, сколько раз выбирали каждую точку
+        //Запоминаем хорошие совпадения
         map<pair<float, float>, pair<int, Mat>>::iterator it;
         for (int i = 0; i < descriptors_1.rows; i++) {
             if (matches[i].distance <= max(2.8 * min_dist, 0.05)) {
@@ -55,7 +56,8 @@ int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoint
     return 0;
 }
 
-vector<pair<float, float>> MatchingAlgorithms::best_points(Mat input_color) {
+float* best_points(Mat input_color) {
+    img_color = input_color;
     Mat input;
     cvtColor(input_color, input, 0);
     map < std::pair<float, float>, std::pair<int, cv::Mat>>points;
@@ -102,24 +104,25 @@ vector<pair<float, float>> MatchingAlgorithms::best_points(Mat input_color) {
         reverse_points.insert({ elem.second.first, {elem.first.first, elem.first.second, elem.second.second} });
     }
     int i = 0;
-    vector<pair<float, float>> result;
+    float * result = new float[20];
     multimap<int, tuple<float, float, Mat>>::iterator it = reverse_points.end();
-    while (i < 20) {
+    while (i < 10) {
         --it;
         Point2f p(get<0>(it->second), get<1>(it->second));
         KeyPoint new_point = KeyPoint(p, 5, -1, 0, 0, -1);
         best_keypoints.push_back({ new_point, get<2>(it->second) });
-        result.push_back({ get<0>(it->second), get<1>(it->second) });
+        result[2 * i] = get<0>(it->second);
+        result[2 * i + 1] = get<1>(it->second);
         ++i;
     }
-
+    
     return result;
 }
 
-Mat MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num, string text) {
+Mat find_point(Mat input_color, int point_num, string text) {
     //преобразуем в чб
     Mat img;
-    cvtColor(input_color, img, 0);
+    cvtColor(img_color, img, 0);
     Mat input;
     cvtColor(input_color, input, 0);
 
@@ -129,11 +132,10 @@ Mat MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num
     Ptr<ORB> orb = ORB::create();
     orb->detect(input, keypoints);
     orb->compute(input, keypoints, descriptors);
-
     //сопоставляем нашу точку с keypoints
     BFMatcher matcher;
     vector<DMatch> matches;
-    Mat img_matches;
+    Mat result;
     vector<KeyPoint> keypoint_1 = { best_keypoints[point_num].first };
     if (!descriptors.empty()) {
         matcher.match(best_keypoints[point_num].second, descriptors, matches);
@@ -141,6 +143,7 @@ Mat MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num
     result = input_color;
     Point org(keypoints[matches[0].trainIdx].pt.x, keypoints[matches[0].trainIdx].pt.y);
     putText(result, text, org, 1, 2, (60, 20, 220), 2, 8, false);
-    
+
     return result;
 }
+
