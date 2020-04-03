@@ -24,11 +24,11 @@ public:
     
    
     /*сопоставляем keypoints исходной фотки и изменнной*/ 
-    int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points);
+    int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points));
     
     /*выбираем 10 лучших точек на исходном фото*/
-    vector<pair<KeyPoint, Mat>> best_points(Mat input_color);
+    float* best_points(Mat input_color);
     
     /*ищем выбранную точку на кадре с видеопотока*/
-    pair<int, int> find_point(Mat img_color, Mat input_color, int point_num, vector<pair<KeyPoint, Mat>> best_keypoints);
+    Mat find_point(Mat input_color, int point_num, string text);
 };
