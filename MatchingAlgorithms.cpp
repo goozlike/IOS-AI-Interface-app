@@ -116,7 +116,7 @@ vector<pair<float, float>> MatchingAlgorithms::best_points(Mat input_color) {
     return result;
 }
 
-pair<int, int> MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num) {
+Mat MatchingAlgorithms::find_point(Mat img_color, Mat input_color, int point_num, string text) {
     //преобразуем в чб
     Mat img;
     cvtColor(input_color, img, 0);
@@ -138,6 +138,9 @@ pair<int, int> MatchingAlgorithms::find_point(Mat img_color, Mat input_color, in
     if (!descriptors.empty()) {
         matcher.match(best_keypoints[point_num].second, descriptors, matches);
     }
-
-    return { keypoints[matches[0].trainIdx].pt.x, keypoints[matches[0].trainIdx].pt.y };
+    result = input_color;
+    Point org(keypoints[matches[0].trainIdx].pt.x, keypoints[matches[0].trainIdx].pt.y);
+    putText(result, text, org, 1, 2, (60, 20, 220), 2, 8, false);
+    
+    return result;
 }
