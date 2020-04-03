@@ -14,22 +14,33 @@
 
 @implementation MatchingAlgorithmsBridge
 
-- (UIImage *) Match: (UIImage *) image {
+- (UIImage *) match: (UIImage*) image number: (int) num textfield: (string) text{
     
     // convert uiimage to mat
     cv::Mat opencvImage;
     UIImageToMat(image, opencvImage, true);
     
-    // convert colorspace to the one expected by the lane detector algorithm (RGB)
-    cv::Mat convertedColorSpaceImage;
-    cv::cvtColor(opencvImage, convertedColorSpaceImage, CV_RGBA2RGB);
+
     
     // Run lane detection
     MatchingAlgorithms match;
-    cv::Mat imageWithMatches = match.matching(convertedColorSpaceImage);
+    cv::Mat imageWithMatches = match.find_point(opencvImage, num, text);
     
     // convert mat to uiimage and return it to the caller
-    return MatToUIImage(imageWithLaneDetected);
+    return MatToUIImage(imageWithMatches);
+}
+
+- (int *) findBest: (UIImage *) image {
+    
+    // convert uiimage to mat
+    cv::Mat opencvImage;
+    UIImageToMat(image, opencvImage, true);
+    
+    MatchingAlgorithms best;
+    int * points = best.best_points(opencvImage);
+
+    return points;
+    
 }
 
 @end
