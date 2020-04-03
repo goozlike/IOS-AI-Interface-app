@@ -6,14 +6,14 @@
 //  Copyright © 2020 Arina Goloubitskaya. All rights reserved.
 //
 #include "MatchingAlgorithms.hpp"
-
+#import <opencv2/opencv.hpp>
 using namespace cv;
 using namespace std;
 
 std::vector<std::pair<cv::KeyPoint, cv::Mat>> best_keypoints;
 cv::Mat img_color;
 
-int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
+int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
     vector<KeyPoint> keypoints_2;
     Mat descriptors_2;
     Ptr<ORB> orb = ORB::create();
@@ -56,7 +56,7 @@ int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors
     return 0;
 }
 
-float* best_points(Mat input_color) {
+int* MatchingAlgorithms::best_points(Mat input_color) {
     img_color = input_color;
     Mat input;
     cvtColor(input_color, input, 0);
@@ -94,7 +94,7 @@ float* best_points(Mat input_color) {
     for (int i = -2; i <= 2; ++i) {
         Mat output;
         Mat lambda = getRotationMatrix2D(Point2f(input.cols / 2, input.rows / 2), 30*i, 1);
-        warpAffine(input, output, lambda, output.size());       
+        warpAffine(input, output, lambda, output.size());
         matching(input, output, keypoints_1, descriptors_1, points);
     }
 
@@ -104,22 +104,22 @@ float* best_points(Mat input_color) {
         reverse_points.insert({ elem.second.first, {elem.first.first, elem.first.second, elem.second.second} });
     }
     int i = 0;
-    float * result = new float[20];
+    int * result = new int[20];
     multimap<int, tuple<float, float, Mat>>::iterator it = reverse_points.end();
     while (i < 10) {
         --it;
         Point2f p(get<0>(it->second), get<1>(it->second));
         KeyPoint new_point = KeyPoint(p, 5, -1, 0, 0, -1);
         best_keypoints.push_back({ new_point, get<2>(it->second) });
-        result[2 * i] = get<0>(it->second);
-        result[2 * i + 1] = get<1>(it->second);
+        result[2 * i] = (int)get<0>(it->second);
+        result[2 * i + 1] = (int)get<1>(it->second);
         ++i;
     }
     
     return result;
 }
 
-Mat find_point(Mat input_color, int point_num, string text) {
+Mat MatchingAlgorithms::find_point(Mat input_color, int point_num, string text) {
     //преобразуем в чб
     Mat img;
     cvtColor(img_color, img, 0);
@@ -146,4 +146,3 @@ Mat find_point(Mat input_color, int point_num, string text) {
 
     return result;
 }
-
