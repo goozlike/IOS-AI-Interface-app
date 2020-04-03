@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-#endif 
+#endif
 
 #include <opencv2/opencv.hpp>
 
@@ -23,11 +23,11 @@ class MatchingAlgorithms {
 public:
     
    
-    /*сопоставляем keypoints исходной фотки и изменнной*/ 
-    int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points));
+    /*сопоставляем keypoints исходной фотки и изменнной*/
+    int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points);
     
     /*выбираем 10 лучших точек на исходном фото*/
-    float* best_points(Mat input_color);
+    int * best_points(Mat input_color);
     
     /*ищем выбранную точку на кадре с видеопотока*/
     Mat find_point(Mat input_color, int point_num, string text);
