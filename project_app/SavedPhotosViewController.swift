@@ -37,17 +37,31 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         ImageWithKeypoints.image = newImage
+        print(newImage.size)
         
         //вызываем функцию поиска пездатых кейпоинтсов и получаем массив из них
-        //проходим по нему и создаем кнопки с нужными координатами
+        let pointer: UnsafeMutablePointer<Int32> = MatchingAlgorithmsBridge().findBest(newImage)
         
-        //создаем кнопку с координатами
+        //делаем массив нормальный бля
+        let array = Array(UnsafeBufferPointer(start: pointer, count: 20))
+        
+        //проходим по нему и создаем кнопки с нужными координатами
+        /*for i in 0...9 {
+            //создаем кнопку с координатами
+            let button = UIButton(frame: CGRect(x: Int(array[2 * i]), y: Int(array[2 * i + 1]), width: 100, height: 30))
+            
+            button.backgroundColor = .green
+            button.setTitle("keypoint", for: .normal)
+            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        
+
+            self.view.addSubview(button);
+        }*/
+        print(Int(array[0]), Int(array[1]))
         let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 30))
         button.backgroundColor = .green
         button.setTitle("keypoint", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
-
         self.view.addSubview(button);
 
         // Do any additional setup after loading the view.
