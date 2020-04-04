@@ -40,7 +40,6 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         text_f = textField.text
-        num = 3
         return false
     }
     
@@ -79,6 +78,7 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
                 array[i] = Float(CGFloat(array[i]) * ImageWithKeypoints.frame.size.height / heightInPoints + 75)
             }
         }
+        print(array[0], array[1], "after")
         //проходим по нему и создаем кнопки с нужными координатами
         for i in 0...9 {
             //создаем кнопку с координатами
@@ -98,6 +98,7 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
         button.backgroundColor = .green
         button.setTitle("\(id)", for: .normal)
         button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.tag = id
         self.view.addSubview(button);
         
     }
@@ -110,7 +111,7 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
         label.backgroundColor = .red
         label.delegate = self
         self.view.addSubview(label)
-        
+        num = sender.tag
         
         
         //стираем кнопку
