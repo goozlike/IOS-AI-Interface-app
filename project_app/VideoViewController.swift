@@ -11,7 +11,17 @@ import AVFoundation
 
 class VideoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate {
 
-    //ну экран для фотки
+    
+    //переменная для передачи картинки из первого окна
+    var newImage: UIImage!
+    
+    //переменная для передачи номера точки из первого окна
+    var id: Int!
+    
+    //переменная для передачи текста  из первого окна
+    var text: String!
+    
+    //ну окно для фотки
     @IBOutlet weak var imageView: UIImageView!
     
     //возвращаемся на главный экран
@@ -70,13 +80,14 @@ class VideoViewController: UIViewController, UINavigationControllerDelegate, UII
         CVPixelBufferUnlockBaseAddress(imageBuffer, CVPixelBufferLockFlags.readOnly)
         let image = UIImage(cgImage: quartzImage)
         
-        //вот тут мы делаем новую опенсв каритнку и присваеваем ее в имадж вью
+        //вот тут мы делаем новую опенсв каритнку и присваеваем ее в имадж вью при условии что work == true
         if work {
-            let imageWithLaneOverlay = LaneDetectorBridge().detectLane(in: image)
+            let imageCool = MatchingAlgorithmsBridge().pls(image, Int32(id))
         
             DispatchQueue.main.async {
-                self.imageView.image = imageWithLaneOverlay
+                self.imageView.image = imageCool
             }
+        //иначе просто выводим картинку с камеры
         } else {
             DispatchQueue.main.async {
                 self.imageView.image = image
@@ -100,7 +111,9 @@ class VideoViewController: UIViewController, UINavigationControllerDelegate, UII
         self.addCameraInput()
         self.getFrames()
         self.captureSession.startRunning()
-
+        print(id!)
+        
+        
         // Do any additional setup after loading the view.
     }
     
