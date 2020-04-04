@@ -17,8 +17,7 @@
 
 @interface MatchingAlgorithmsBridge : NSObject
 
-- (int *) findBest: (UIImage *) image;
+- (float *) findBest: (UIImage *) image;
 
-- (UIImage *) match: (UIImage *) image;
-
+- (UIImage *) pls: (UIImage *) image : (int) num;
 @end
