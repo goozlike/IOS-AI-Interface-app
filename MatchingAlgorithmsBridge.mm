@@ -14,7 +14,7 @@
 
 @implementation MatchingAlgorithmsBridge
 
-- (UIImage *) match: (UIImage*) image number: (int) num textfield: (string) text{
+- (UIImage *) pls: (UIImage*) image : (int) num{
     
     // convert uiimage to mat
     cv::Mat opencvImage;
@@ -24,20 +24,20 @@
     
     // Run lane detection
     MatchingAlgorithms match;
-    cv::Mat imageWithMatches = match.find_point(opencvImage, num, text);
+    cv::Mat imageWithMatches = match.find_point(opencvImage, num, "aaaa");
     
     // convert mat to uiimage and return it to the caller
     return MatToUIImage(imageWithMatches);
 }
 
-- (int *) findBest: (UIImage *) image {
+- (float *) findBest: (UIImage *) image {
     
     // convert uiimage to mat
     cv::Mat opencvImage;
     UIImageToMat(image, opencvImage, true);
     
     MatchingAlgorithms best;
-    int * points = best.best_points(opencvImage);
+    float * points = best.best_points(opencvImage);
 
     return points;
     
