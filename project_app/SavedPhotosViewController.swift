@@ -8,12 +8,26 @@
 
 import UIKit
 
+
 class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
 
     
     //возвращаемся обратно в меню
     @IBAction func BackToMenuButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    var num: Int!
+    var text_f: String!
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "GoToOrb" {
+            let dvc = segue.destination as! VideoViewController
+            
+            dvc.id  = num
+            
+            dvc.text = text_f
+        }
     }
     
     //переход к камере
@@ -25,6 +39,8 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
     //функция чтобы при нажатии ввод клава убиралась
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
+        text_f = textField.text
+        num = 3
         return false
     }
     
@@ -40,43 +56,62 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
         print(newImage.size)
         
         //вызываем функцию поиска пездатых кейпоинтсов и получаем массив из них
-        let pointer: UnsafeMutablePointer<Int32> = MatchingAlgorithmsBridge().findBest(newImage)
+        let pointer = MatchingAlgorithmsBridge().findBest(newImage)
+
         
         //делаем массив нормальный бля
-        let array = Array(UnsafeBufferPointer(start: pointer, count: 20))
+        var array = Array(UnsafeBufferPointer(start: pointer, count: 20))
         
-        //проходим по нему и создаем кнопки с нужными координатами
-        /*for i in 0...9 {
-            //создаем кнопку с координатами
-            let button = UIButton(frame: CGRect(x: Int(array[2 * i]), y: Int(array[2 * i + 1]), width: 100, height: 30))
-            
-            button.backgroundColor = .green
-            button.setTitle("keypoint", for: .normal)
-            button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        
+        let heightInPoints = newImage.size.height
 
-            self.view.addSubview(button);
-        }*/
-        print(Int(array[0]), Int(array[1]))
-        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 30))
-        button.backgroundColor = .green
-        button.setTitle("keypoint", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        self.view.addSubview(button);
+        let widthInPoints = newImage.size.width
+        //get the frame of the square
+        
+        //edit square
+        print(ImageWithKeypoints.frame.size.width, ImageWithKeypoints.frame.size.height, "size of imageView")
+        print(ImageWithKeypoints.frame.origin.x, ImageWithKeypoints.frame.origin.y, "origin")
+        
+        print(array[0], array[1], "before")
+        for i in 0...19 {
+            if (i % 2 == 0) {
+                array[i] = Float(CGFloat(array[i]) * ImageWithKeypoints.frame.size.width / widthInPoints)
+            } else {
+                array[i] = Float(CGFloat(array[i]) * ImageWithKeypoints.frame.size.height / heightInPoints + 75)
+            }
+        }
+        //проходим по нему и создаем кнопки с нужными координатами
+        for i in 0...9 {
+            //создаем кнопку с координатами
+            makeButton(id: i, x: CGFloat(array[2 * i]), y: CGFloat(array[2 * i + 1]))
+        }
+
 
         // Do any additional setup after loading the view.
     }
     
+    //функция для создания кнопок
+    
+    func makeButton(id: Int, x: CGFloat, y: CGFloat) {
+        let button = UIButton()
+        button.frame = CGRect(x: x, y: y, width: 20, height: 20)
+       
+        button.backgroundColor = .green
+        button.setTitle("\(id)", for: .normal)
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        self.view.addSubview(button);
+        
+    }
     
     //действие для кнопки
     @objc func buttonAction(sender: UIButton!) {
-        
         
         //создаем текстововое окно на месте этой кнопки с таким же размером
         let label = UITextField(frame: sender.frame)
         label.backgroundColor = .red
         label.delegate = self
         self.view.addSubview(label)
+        
+        
         
         //стираем кнопку
         sender.removeFromSuperview()
