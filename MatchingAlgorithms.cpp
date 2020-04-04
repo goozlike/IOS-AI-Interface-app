@@ -56,7 +56,7 @@ int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoint
     return 0;
 }
 
-int* MatchingAlgorithms::best_points(Mat input_color) {
+float* MatchingAlgorithms::best_points(Mat input_color) {
     img_color = input_color;
     Mat input;
     cvtColor(input_color, input, 0);
@@ -104,15 +104,15 @@ int* MatchingAlgorithms::best_points(Mat input_color) {
         reverse_points.insert({ elem.second.first, {elem.first.first, elem.first.second, elem.second.second} });
     }
     int i = 0;
-    int * result = new int[20];
+    float * result = new float[20];
     multimap<int, tuple<float, float, Mat>>::iterator it = reverse_points.end();
     while (i < 10) {
         --it;
         Point2f p(get<0>(it->second), get<1>(it->second));
         KeyPoint new_point = KeyPoint(p, 5, -1, 0, 0, -1);
         best_keypoints.push_back({ new_point, get<2>(it->second) });
-        result[2 * i] = (int)get<0>(it->second);
-        result[2 * i + 1] = (int)get<1>(it->second);
+        result[2 * i] = get<0>(it->second);
+        result[2 * i + 1] = get<1>(it->second);
         ++i;
     }
     
