@@ -16,20 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEW-1L-chU">
-                                <rect key="frame" x="0.0" y="786" width="135" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.85971183713379118" green="0.94083436432542378" blue="0.96621346470000002" alpha="0.92038952464788737" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Upload from gallery">
-                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                    <color key="titleShadowColor" red="0.43570192202396435" green="0.73537543707081687" blue="0.96621346470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
-                                <connections>
-                                    <action selector="UploadFromGalleryBotton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WGV-tt-0q8"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXf-6x-jYR" customClass="RoundButton" customModule="project_app" customModuleProvider="target">
-                                <rect key="frame" x="159" y="766" width="96" height="94"/>
+                                <rect key="frame" x="163" y="733" width="96" height="94"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94878160895967301" green="0.87836317623591842" blue="0.96621346470000002" alpha="0.64785981514084512" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Take photo">
@@ -44,16 +32,8 @@
                                     <action selector="TakePhotoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5qM-w3-d1t"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyd-WH-nuR">
-                                <rect key="frame" x="20" y="66" width="110" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="goToCamera"/>
-                                <connections>
-                                    <action selector="goTocamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYU-34-lyJ"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Zc-LZ-zDW">
-                                <rect key="frame" x="279" y="785" width="135" height="55"/>
+                                <rect key="frame" x="263" y="753" width="135" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.85971183713379118" green="0.94083436432542378" blue="0.96621346470000002" alpha="0.92038952464788737" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="tintColor" red="0.22894202292707314" green="0.44642957129016103" blue="0.96621346473693848" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -65,9 +45,29 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58O-XJ-Azc">
-                                <rect key="frame" x="0.0" y="135" width="414" height="533"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="109" width="414" height="515"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEW-1L-chU">
+                                <rect key="frame" x="20" y="753" width="135" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.85971183713379118" green="0.94083436432542378" blue="0.96621346470000002" alpha="0.92038952464788737" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Upload from gallery">
+                                    <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    <color key="titleShadowColor" red="0.43570192202396435" green="0.73537543707081687" blue="0.96621346470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="UploadFromGalleryBotton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WGV-tt-0q8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyd-WH-nuR">
+                                <rect key="frame" x="20" y="20" width="110" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="goToCamera"/>
+                                <connections>
+                                    <action selector="goTocamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYU-34-lyJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -89,10 +89,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9l-Xi-C50">
-                                <rect key="frame" x="0.0" y="84" width="414" height="674"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPk-mM-CDB">
                                 <rect key="frame" x="289" y="20" width="125" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -109,6 +105,10 @@
                                     <action selector="BackToMenuButton:" destination="UHl-vm-6Wm" eventType="touchUpInside" id="JUX-bX-AeL"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9l-Xi-C50">
+                                <rect key="frame" x="0.0" y="125" width="414" height="552"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="EvM-PT-k56"/>
@@ -139,10 +139,6 @@
                                     <action selector="goBack:" destination="NhC-z9-ePG" eventType="touchUpInside" id="pAN-9I-iTG"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GC-gw-uCg">
-                                <rect key="frame" x="0.0" y="58" width="414" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-Jj-QSK">
                                 <rect key="frame" x="136" y="748" width="142" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -151,6 +147,10 @@
                                     <action selector="startButton:" destination="NhC-z9-ePG" eventType="touchUpInside" id="278-2y-5B5"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GC-gw-uCg">
+                                <rect key="frame" x="0.0" y="146" width="414" height="514"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="X4R-F9-Pp6"/>
