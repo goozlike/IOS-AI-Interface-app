@@ -27,7 +27,7 @@ public:
     int matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points);
     
     /*выбираем 10 лучших точек на исходном фото*/
-    int * best_points(Mat input_color);
+    float * best_points(Mat input_color);
     
     /*ищем выбранную точку на кадре с видеопотока*/
     Mat find_point(Mat input_color, int point_num, string text);
