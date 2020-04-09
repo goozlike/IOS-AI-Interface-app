@@ -14,7 +14,7 @@
 
 @implementation MatchingAlgorithmsBridge
 
-- (UIImage *) pls: (UIImage*) image : (int) num{
+- (UIImage *) findAndDraw: (UIImage*) image : (int) num{
     
     // convert uiimage to mat
     cv::Mat opencvImage;
