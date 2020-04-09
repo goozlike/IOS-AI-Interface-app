@@ -19,5 +19,5 @@
 
 - (float *) findBest: (UIImage *) image;
 
-- (UIImage *) pls: (UIImage *) image : (int) num;
+- (UIImage *) findAndDraw: (UIImage *) image : (int) num;
 @end
