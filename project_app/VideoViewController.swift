@@ -82,7 +82,7 @@ class VideoViewController: UIViewController, UINavigationControllerDelegate, UII
         
         //вот тут мы делаем новую опенсв каритнку и присваеваем ее в имадж вью при условии что work == true
         if work {
-            let imageCool = MatchingAlgorithmsBridge().pls(image, Int32(id))
+            let imageCool = MatchingAlgorithmsBridge().findAndDraw(image, Int32(id))
         
             DispatchQueue.main.async {
                 self.imageView.image = imageCool
