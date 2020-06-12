@@ -140,7 +140,7 @@ float* MatchingAlgorithms::best_points(Mat input_color) {
     }
     for (int j = 0; j < 10; ++j) {
         result[2 * j] = best_keypoints[groups[j][0]].first.pt.x;
-        result[2 * i + 1] = best_keypoints[groups[j][0]].first.pt.y;
+        result[2 * j + 1] = best_keypoints[groups[j][0]].first.pt.y;
     }
     return result;
 }
