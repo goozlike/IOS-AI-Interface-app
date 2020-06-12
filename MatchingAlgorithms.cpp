@@ -12,6 +12,7 @@ using namespace std;
 
 std::vector<std::pair<cv::KeyPoint, cv::Mat>> best_keypoints;
 cv::Mat img_color;
+vector<vector<unsigned long long>> groups;
 
 int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
     vector<KeyPoint> keypoints_2;
@@ -68,32 +69,44 @@ float* MatchingAlgorithms::best_points(Mat input_color) {
     Ptr<ORB> orb = ORB::create();
     orb->detect(input, keypoints_1);
     orb->compute(input, keypoints_1, descriptors_1);
-    //перспектива
     Point2f inputQuad[4];
     Point2f outputQuad[4];
-    for (int j = 10; j < 40; j += 6) {
-        vector<vector<int>> array = {{-4*j, -4*j, 4*j, -4*j, -4*j, -4*j, 4*j, -4*j}, { 4*j, 4*j, -4*j, 4*j, 4*j, 4*j, -4*j, 4*j},
-        {-j, 4*j, 8*j, 0, 10*j, -8*j, -2*j, 2*j}, {-j, -4*j, 8*j, 0, 10*j, 8*j, -2*j, -2*j} };
-        for (int i = 0; i < array.size(); ++i) {
-            inputQuad[0] = Point2f(array[i][0], array[i][1]);
-            inputQuad[1] = Point2f(input.cols + array[i][2], array[i][3]);
-            inputQuad[2] = Point2f(input.cols + array[i][4], input.rows + array[i][5]);
-            inputQuad[3] = Point2f(array[i][6], input.rows + array[i][7]);
-            outputQuad[0] = Point2f(0, 0);
-            outputQuad[1] = Point2f(input.cols - 1, 0);
-            outputQuad[2] = Point2f(input.cols - 1, input.rows - 1);
-            outputQuad[3] = Point2f(0, input.rows - 1);
-            Mat lambda = getPerspectiveTransform(inputQuad, outputQuad);
-            Mat output;
-            warpPerspective(input, output, lambda, output.size());
-            matching(input, output, keypoints_1, descriptors_1, points);
-        }
+    vector<vector<double>> arr = { {0, 0.1}, {0, 0.08}, {0, 0.05}, {0.05, 0}, {0.08, 0}, {0.1, 0} };
+    // vertical perspective
+    for (int i = 0; i < arr.size(); ++i) {
+        inputQuad[0] = Point2f(0, 0);
+        inputQuad[1] = Point2f(input.cols, 0);
+        inputQuad[2] = Point2f(input.cols, input.rows);
+        inputQuad[3] = Point2f(0, input.rows);
+        outputQuad[0] = Point2f(0 + arr[i][0] * input.cols, 0 + arr[i][0] * input.rows);
+        outputQuad[1] = Point2f(input.cols * (1 - arr[i][0]), 0 + arr[i][0] * input.rows);
+        outputQuad[2] = Point2f(input.cols * (1 - arr[i][1]), input.rows * (1 - arr[i][1]));
+        outputQuad[3] = Point2f(0 + arr[i][1] * input.cols, input.rows * (1 - arr[i][1]));
+        Mat lambda = getPerspectiveTransform(inputQuad, outputQuad);
+        Mat output;
+        warpPerspective(input, output, lambda, output.size());
+        matching(input, output, keypoints_1, descriptors_1, points);
+    }
+    // horizontal perspective
+    for (int i = 0; i < arr.size(); ++i) {
+        inputQuad[0] = Point2f(0, 0);
+        inputQuad[1] = Point2f(input.cols, 0);
+        inputQuad[2] = Point2f(input.cols, input.rows);
+        inputQuad[3] = Point2f(0, input.rows);
+        outputQuad[0] = Point2f(0 + arr[i][0] * input.cols, 0 + arr[i][0] * input.rows);
+        outputQuad[1] = Point2f(input.cols * (1 - arr[i][1]), 0 + arr[i][1] * input.rows);
+        outputQuad[2] = Point2f(input.cols * (1 - arr[i][1]), input.rows * (1 - arr[i][1]));
+        outputQuad[3] = Point2f(0 + arr[i][0] * input.cols, input.rows * (1 - arr[i][0]));
+        Mat lambda = getPerspectiveTransform(inputQuad, outputQuad);
+        Mat output;
+        warpPerspective(input, output, lambda, output.size());
+        matching(input, output, keypoints_1, descriptors_1, points);
     }
 
     //поворот
     for (int i = -2; i <= 2; ++i) {
         Mat output;
-        Mat lambda = getRotationMatrix2D(Point2f(input.cols / 2, input.rows / 2), 30*i, 1);
+        Mat lambda = getRotationMatrix2D(Point2f(input.cols / 2, input.rows / 2), 30 * i, 1);
         warpAffine(input, output, lambda, output.size());
         matching(input, output, keypoints_1, descriptors_1, points);
     }
@@ -103,19 +116,32 @@ float* MatchingAlgorithms::best_points(Mat input_color) {
     for (auto elem : points) {
         reverse_points.insert({ elem.second.first, {elem.first.first, elem.first.second, elem.second.second} });
     }
-    int i = 0;
+    unsigned long long i = 0;
     float * result = new float[20];
     multimap<int, tuple<float, float, Mat>>::iterator it = reverse_points.end();
-    while (i < 10) {
+    while (groups.size() != 10) {
         --it;
         Point2f p(get<0>(it->second), get<1>(it->second));
-        KeyPoint new_point = KeyPoint(p, 5, -1, 0, 0, -1);
+        KeyPoint new_point = KeyPoint(p, 20, -1, 0, 0, -1);
         best_keypoints.push_back({ new_point, get<2>(it->second) });
-        result[2 * i] = get<0>(it->second);
-        result[2 * i + 1] = get<1>(it->second);
+        int flag = 0;
+        for (int j = 0; j < groups.size(); ++j) {
+            float dist = pow((new_point.pt.x - best_keypoints[groups[j][0]].first.pt.x), 2) + pow((new_point.pt.y - best_keypoints[groups[j][0]].first.pt.y), 2);
+            if (dist < 1000) {
+                groups[j].push_back(i);
+                flag = 1;
+                break;
+            }
+        }
+        if (flag == 0) {
+            groups.push_back({ i });
+        }
         ++i;
     }
-    
+    for (int j = 0; j < 10; ++j) {
+        result[2 * j] = best_keypoints[groups[j][0]].first.pt.x;
+        result[2 * i + 1] = best_keypoints[groups[j][0]].first.pt.y;
+    }
     return result;
 }
 
@@ -127,22 +153,33 @@ Mat MatchingAlgorithms::find_point(Mat input_color, int point_num, string text) 
     cvtColor(input_color, input, 0);
 
     //keypoints на кадре видеопотока
-    vector<KeyPoint> keypoints;
-    Mat descriptors;
+    vector<KeyPoint> keypoints_2;
+    Mat descriptors_2;
     Ptr<ORB> orb = ORB::create();
-    orb->detect(input, keypoints);
-    orb->compute(input, keypoints, descriptors);
+    orb->detect(input, keypoints_2);
+    orb->compute(input, keypoints_2, descriptors_2);
     //сопоставляем нашу точку с keypoints
     BFMatcher matcher;
     vector<DMatch> matches;
     Mat result;
-    vector<KeyPoint> keypoint_1 = { best_keypoints[point_num].first };
-    if (!descriptors.empty()) {
-        matcher.match(best_keypoints[point_num].second, descriptors, matches);
+    Mat descriptors_1;
+    for (int i = 0; i < groups[point_num].size(); ++i) {
+        descriptors_1.push_back(best_keypoints[groups[point_num][i]].second);
+    }
+    if (!descriptors_2.empty()) {
+        matcher.match(descriptors_1, descriptors_2, matches);
+    }
+    float dist = matches[0].distance;
+    int num = 0;
+    for (int i = 1; i < groups[point_num].size(); ++i) {
+        if (matches[i].distance < dist) {
+            dist = matches[i].distance;
+            num = i;
+        }
     }
     result = input_color;
-    Point org(keypoints[matches[0].trainIdx].pt.x, keypoints[matches[0].trainIdx].pt.y);
-    putText(result, text, org, 1, 2, (60, 20, 220), 2, 8, false);
+    Point org(keypoints_2[matches[num].trainIdx].pt.x, keypoints_2[matches[num].trainIdx].pt.y);
+    putText(result, text, org, 1, 4, CV_RGB(255, 0, 120), 4, 8, false);
 
     return result;
 }
