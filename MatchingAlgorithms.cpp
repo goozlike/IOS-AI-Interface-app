@@ -61,8 +61,12 @@ int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoint
 
 float* MatchingAlgorithms::best_points(Mat input_color) {
     img_color = input_color;
+    Mat input_gray;
+    cvtColor(input_color, input_gray, 0);
+    Mat input_1;
+    medianBlur(input_gray, input_1, 5);
     Mat input;
-    cvtColor(input_color, input, 0);
+    GaussianBlur(input_1, input, Size(9, 9), 2.0);
     map < std::pair<float, float>, std::pair<int, cv::Mat>>points;
 
     //keypoints исходной картинки
@@ -155,8 +159,10 @@ Mat MatchingAlgorithms::find_point(Mat input_color, int point_num, string text) 
     cvtColor(input_color, input_gray, 0);
 
     //шумоподавление
+    Mat input_1;
+    medianBlur(input_gray, input_1, 5);
     Mat input;
-    medianBlur(input_gray, input, 5);
+    GaussianBlur(input_1, input, Size(9, 9), 2.0);
 
     //keypoints на кадре видеопотока
     vector<KeyPoint> keypoints_2;
