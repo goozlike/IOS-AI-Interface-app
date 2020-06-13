@@ -10,9 +10,11 @@
 using namespace cv;
 using namespace std;
 
-std::vector<std::pair<cv::KeyPoint, cv::Mat>> best_keypoints;
-cv::Mat img_color;
+vector<pair<KeyPoint, Mat>> best_keypoints;
+Mat img_color;
 vector<vector<unsigned long long>> groups;
+Point fine_working_point = Point(0, 0);
+int counter = 0;
 
 int MatchingAlgorithms::matching(Mat img_1, Mat img_2, vector<KeyPoint> keypoints_1, Mat descriptors_1, map<pair<float, float>, pair<int, Mat>> &points) {
     vector<KeyPoint> keypoints_2;
@@ -149,8 +151,12 @@ Mat MatchingAlgorithms::find_point(Mat input_color, int point_num, string text) 
     //преобразуем в чб
     Mat img;
     cvtColor(img_color, img, 0);
+    Mat input_gray;
+    cvtColor(input_color, input_gray, 0);
+
+    //шумоподавление
     Mat input;
-    cvtColor(input_color, input, 0);
+    medianBlur(input_gray, input, 5);
 
     //keypoints на кадре видеопотока
     vector<KeyPoint> keypoints_2;
@@ -178,8 +184,23 @@ Mat MatchingAlgorithms::find_point(Mat input_color, int point_num, string text) 
         }
     }
     result = input_color;
-    Point org(keypoints_2[matches[num].trainIdx].pt.x, keypoints_2[matches[num].trainIdx].pt.y);
-    putText(result, text, org, 1, 4, CV_RGB(255, 0, 120), 4, 8, false);
-
+    Scalar color = cv::Scalar(50, 0, 255, 255);
+    int baseline = 0;
+    Size textSize = getTextSize(text, 1, 6, 8, &baseline);
+    Point org(keypoints_2[matches[num].trainIdx].pt.x - (textSize.width/2), keypoints_2[matches[num].trainIdx].pt.y + (textSize.height/2));
+    if ((fine_working_point.x == 0 && fine_working_point.y == 0) || counter > 20) {
+        fine_working_point = org;
+        counter = 0;
+    }
+    if (pow(pow((org.x - fine_working_point.x), 2) + pow((org.y - fine_working_point.y), 2), 0.5) > pow(pow(input.cols, 2) + pow(input.rows, 2), 0.5)/3) {
+        org = fine_working_point;
+        counter += 1;
+    }
+    else {
+        fine_working_point = org;
+        counter = 0;
+    }
+    putText(result, text, org, 1, 6, color, 6, 8, false);
+    
     return result;
 }
