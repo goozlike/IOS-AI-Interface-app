@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXf-6x-jYR" customClass="RoundButton" customModule="project_app" customModuleProvider="target">
-                                <rect key="frame" x="163" y="733" width="96" height="94"/>
+                                <rect key="frame" x="159" y="721" width="96" height="94"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.94878160895967301" green="0.87836317623591842" blue="0.96621346470000002" alpha="0.64785981514084512" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Take photo">
@@ -33,25 +33,36 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Zc-LZ-zDW">
-                                <rect key="frame" x="263" y="753" width="135" height="55"/>
+                                <rect key="frame" x="270" y="753" width="135" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.85971183713379118" green="0.94083436432542378" blue="0.96621346470000002" alpha="0.92038952464788737" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.22894202292707314" green="0.44642957129016103" blue="0.96621346473693848" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <state key="normal" title="Saved photos">
+                                <state key="normal" title="Process photo">
                                     <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 </state>
                                 <connections>
                                     <action selector="SavedPhotos:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fhh-xQ-iqa"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yZ-2U-cY7">
+                                <rect key="frame" x="136" y="45" width="142" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Saved Projects">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="SavedProjectButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TdP-OR-oo1"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58O-XJ-Azc">
-                                <rect key="frame" x="0.0" y="109" width="414" height="515"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="527"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lEW-1L-chU">
-                                <rect key="frame" x="20" y="753" width="135" height="55"/>
+                                <rect key="frame" x="9" y="753" width="135" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.85971183713379118" green="0.94083436432542378" blue="0.96621346470000002" alpha="0.92038952464788737" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Upload from gallery">
                                     <color key="titleColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                     <color key="titleShadowColor" red="0.43570192202396435" green="0.73537543707081687" blue="0.96621346470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -60,21 +71,15 @@
                                     <action selector="UploadFromGalleryBotton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WGV-tt-0q8"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyd-WH-nuR">
-                                <rect key="frame" x="20" y="20" width="110" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="goToCamera"/>
-                                <connections>
-                                    <action selector="goTocamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYU-34-lyJ"/>
-                                </connections>
-                            </button>
                         </subviews>
+                        <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="58O-XJ-Azc" id="Kzo-AN-H52"/>
                         <segue destination="UHl-vm-6Wm" kind="presentation" identifier="gallerySegue" id="tm6-sx-kmE"/>
                         <segue destination="NhC-z9-ePG" kind="presentation" identifier="VideoSegue" id="GfD-uT-tGL"/>
+                        <segue destination="tlF-1Y-Kxi" kind="presentation" identifier="SavedProjectsSegue" id="eb1-Da-YZm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -90,30 +95,56 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPk-mM-CDB">
-                                <rect key="frame" x="289" y="20" width="125" height="30"/>
+                                <rect key="frame" x="281" y="41" width="123" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="ready"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="ready">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="GoToOrb:" destination="UHl-vm-6Wm" eventType="touchUpInside" id="UyH-mH-0OC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iOO-U2-ejl">
-                                <rect key="frame" x="0.0" y="34" width="147" height="30"/>
+                                <rect key="frame" x="9" y="41" width="120" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="back"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="back">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="BackToMenuButton:" destination="UHl-vm-6Wm" eventType="touchUpInside" id="JUX-bX-AeL"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K9l-Xi-C50">
-                                <rect key="frame" x="0.0" y="125" width="414" height="552"/>
+                                <rect key="frame" x="0.0" y="144" width="414" height="555"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Введите имя проекта:" borderStyle="roundedRect" minimumFontSize="17" background="square.and.arrow.down.on.square.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="2zp-xI-dpT">
+                                <rect key="frame" x="58" y="93" width="299" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="textColor" red="0.40055439570000001" green="1" blue="0.37642792720000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WmE-yg-801">
+                                <rect key="frame" x="151" y="740" width="113" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="save">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="SaveButton:" destination="UHl-vm-6Wm" eventType="touchUpInside" id="FgC-SL-gRZ"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="EvM-PT-k56"/>
                     </view>
                     <connections>
+                        <outlet property="FileNameTextField" destination="2zp-xI-dpT" id="v6i-Pk-2fY"/>
                         <outlet property="ImageWithKeypoints" destination="K9l-Xi-C50" id="g3n-mx-hgN"/>
                         <segue destination="NhC-z9-ePG" kind="presentation" identifier="GoToOrb" id="3NR-O2-9SU"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToMenu" id="VMp-vh-Idd"/>
@@ -121,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JJQ-f5-oxf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918.840579710145" y="16.741071428571427"/>
+            <point key="canvasLocation" x="2057.971014492754" y="132.58928571428572"/>
         </scene>
         <!--Video View Controller-->
         <scene sceneID="G5m-T2-2uf">
@@ -132,27 +163,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ErZ-dw-SX4">
-                                <rect key="frame" x="88" y="20" width="238" height="30"/>
+                                <rect key="frame" x="121" y="8" width="173" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="back"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="back">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="goBack:" destination="NhC-z9-ePG" eventType="touchUpInside" id="pAN-9I-iTG"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GC-gw-uCg">
+                                <rect key="frame" x="0.0" y="58" width="414" height="696"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RMN-Jj-QSK">
-                                <rect key="frame" x="136" y="748" width="142" height="60"/>
+                                <rect key="frame" x="143" y="762" width="128" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="start"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="start">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="startButton:" destination="NhC-z9-ePG" eventType="touchUpInside" id="278-2y-5B5"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4GC-gw-uCg">
-                                <rect key="frame" x="0.0" y="146" width="414" height="514"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="X4R-F9-Pp6"/>
                     </view>
                     <connections>
@@ -161,10 +198,148 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z20-2G-4cW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="476.81159420289856" y="969.64285714285711"/>
+            <point key="canvasLocation" x="3244.9275362318845" y="132.58928571428572"/>
+        </scene>
+        <!--Saved Projects View Controller-->
+        <scene sceneID="fAt-H6-lSl">
+            <objects>
+                <viewController storyboardIdentifier="SavedProjectsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tlF-1Y-Kxi" customClass="SavedProjectsViewController" customModule="project_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mKT-eO-8x5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9uC-1Z-mDx">
+                                <rect key="frame" x="0.0" y="39" width="414" height="706"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="ONl-Qq-cEe">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ONl-Qq-cEe" id="2f9-4v-KfB" customClass="TableViewCell" customModule="project_app">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="JWw-dl-3RR"/>
+                    </view>
+                    <connections>
+                        <outlet property="TableView" destination="9uC-1Z-mDx" id="un2-pn-pUb"/>
+                        <segue destination="3x5-G2-QjC" kind="presentation" identifier="chooseProject" id="0pY-c7-01b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XjE-GW-hct" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1039.1304347826087" y="885.9375"/>
+        </scene>
+        <!--Pop Up View Controller-->
+        <scene sceneID="SIi-GG-N3Z">
+            <objects>
+                <viewController storyboardIdentifier="popUpVCid" id="1aQ-Ui-dHG" customClass="PopUpViewController" customModule="project_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="JRX-3j-XL7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CrG-El-T0c">
+                                <rect key="frame" x="87" y="309" width="240" height="278"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwv-2J-FPw">
+                                        <rect key="frame" x="90" y="240" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Закрыть">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closePopUp:" destination="1aQ-Ui-dHG" eventType="touchUpInside" id="fqU-J5-2Hp"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="If5-5Q-t3c">
+                                        <rect key="frame" x="5" y="73" width="230" height="132"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <attributedString key="attributedText">
+                                            <fragment content="Вы не выбрали фото">
+                                                <attributes>
+                                                    <color key="NSColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <font key="NSFont" metaFont="system" size="17"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.40055439569994933" green="1" blue="0.37642792723476737" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="25t-t4-dyL"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="If5-5Q-t3c" id="jD3-kg-94b"/>
+                        <outlet property="messageView" destination="CrG-El-T0c" id="aM8-Vi-CSL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oKK-O1-Zmh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1586.9565217391305" y="-541.07142857142856"/>
+        </scene>
+        <!--Saved Projects Picker View Controller-->
+        <scene sceneID="HfO-iI-Swi">
+            <objects>
+                <viewController id="3x5-G2-QjC" customClass="SavedProjectsPickerViewController" customModule="project_app" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9E9-KF-sNT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBB-ST-lSH">
+                                <rect key="frame" x="299" y="51" width="106" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Ready">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="readyButton:" destination="3x5-G2-QjC" eventType="touchUpInside" id="9r8-Dd-nPh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qow-yQ-ORS">
+                                <rect key="frame" x="29" y="51" width="110" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.20662477609999999" green="0.66112256049999996" blue="0.61019462349999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButton:" destination="3x5-G2-QjC" eventType="touchUpInside" id="br6-G9-cgi"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LoC-57-EgA">
+                                <rect key="frame" x="0.0" y="172" width="414" height="552"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="g5s-4F-24j"/>
+                    </view>
+                    <connections>
+                        <outlet property="ImageView" destination="LoC-57-EgA" id="aqU-1G-9c2"/>
+                        <segue destination="NhC-z9-ePG" kind="presentation" identifier="GoToORB" id="fY8-VM-UpC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FfT-qk-Fys" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2057.971014492754" y="885.9375"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3NR-O2-9SU"/>
+        <segue reference="fY8-VM-UpC"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="square.and.arrow.down.on.square.fill" catalog="system" width="122" height="128"/>
+    </resources>
 </document>

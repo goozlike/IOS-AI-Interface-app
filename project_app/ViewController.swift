@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 
 
+
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     var imagePickerController : UIImagePickerController!
@@ -19,7 +20,12 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         performSegue(withIdentifier: "VideoSegue", sender: self)
     }
     
-
+    //кнопка для перехода на экран с сохраннеными штуками
+    @IBAction func SavedProjectButton(_ sender: UIButton) {
+        performSegue(withIdentifier: "SavedProjectsSegue", sender: self)
+        
+    }
+    
     
     //конпка  которая фоткает
     @IBAction func TakePhotoButton(_ sender: UIButton) {
@@ -27,11 +33,26 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         imagePickerController.delegate = self
         imagePickerController.sourceType = .camera
         present(imagePickerController, animated: true, completion: nil)
+        
     }
     
     //переходим на экран с кейпоинтсами
     @IBAction func SavedPhotos(_ sender: UIButton) {
-        performSegue(withIdentifier: "gallerySegue", sender: self)
+        
+        if imageView.image != nil {
+            performSegue(withIdentifier: "gallerySegue", sender: self)
+        } else {
+            
+            let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpVCid") as! PopUpViewController
+            
+            self.addChild(popUpVC)
+            popUpVC.view.frame = self.view.frame
+            self.view.addSubview(popUpVC.view)
+            
+            popUpVC.didMove(toParent: self)
+            
+        }
+        
     }
     
     //передаем картинку на другой вью контролер
@@ -44,6 +65,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     //загружаем из галереи
     @IBAction func UploadFromGalleryBotton(_ sender: UIButton) {
+        
+        
         let image = UIImagePickerController()
         image.delegate = self
         
@@ -80,7 +103,6 @@ let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view, typically from a nib.
     }
 

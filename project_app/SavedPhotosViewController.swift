@@ -12,14 +12,46 @@ import UIKit
 class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
 
     
+    var num: Int!
+    var text_f: String!
+    
+    //переменная для передачи картинки из первого окна
+    var newImage: UIImage!
+    
+    //окно картинки с кейпоинтсами
+    @IBOutlet weak var ImageWithKeypoints: UIImageView!
+    
+    //окошко с именем файла
+    @IBOutlet weak var FileNameTextField: UITextField!
+    
+    //функция которая вызывается при нажатии на имЯ файла
+    @objc func myTargetFunction(textField: UITextField) {
+        FileNameTextField.text = ""
+    }
+    
     //возвращаемся обратно в меню
     @IBAction func BackToMenuButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    var num: Int!
-    var text_f: String!
     
+    //переход к камере
+    @IBAction func GoToOrb(_ sender: Any) {
+        
+        if text_f != nil {
+            performSegue(withIdentifier: "GoToOrb", sender: self)
+            
+        } else {
+            let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpVCid") as! PopUpViewController
+            popUpVC.text = "Выберите точку и введите текст"
+            self.addChild(popUpVC)
+            popUpVC.view.frame = self.view.frame
+            self.view.addSubview(popUpVC.view)
+            
+            popUpVC.didMove(toParent: self)
+        }
+    }
+    //функция для перехода к камере
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "GoToOrb" {
             let dvc = segue.destination as! VideoViewController
@@ -30,59 +62,145 @@ class SavedPhotosViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    //переход к камере
-    @IBAction func GoToOrb(_ sender: Any) {
-        performSegue(withIdentifier: "GoToOrb", sender: self)
-    }
-    
-    
     //функция чтобы при нажатии ввод клава убиралась
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
-        text_f = textField.text
+        if textField != FileNameTextField {
+            text_f = textField.text
+        }
         return false
     }
+
+  
+
+
+//сохранение проекта
+    @IBAction func SaveButton(_ sender: Any) {
+        
+        //читаем имя проекта
+        let fileName = FileNameTextField.text!
+        
+        //если оно введено и длинна больше 0 то сохраняем иначе ошибка
+        if fileName != "Введите имя проекта:" && fileName.count > 0 {
+            
+            //стоит проверить что такое имя уже не выбрано
+            if check(name: fileName) == 0 {
+                
+                let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpVCid") as! PopUpViewController
+                
+                popUpVC.text = "Такой файл уже существует"
+                
+                self.addChild(popUpVC)
+                popUpVC.view.frame = self.view.frame
+                self.view.addSubview(popUpVC.view)
+                
+                popUpVC.didMove(toParent: self)
+                
+            } else {
+            
+                let data = newImage.pngData()!
+            
+                //делаем путь ~/filename
+                let documentsPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
+                let projectURL = documentsPath.appendingPathComponent(fileName)
+                let photoURL = projectURL!.appendingPathComponent("png")
+                let grURL = projectURL!.appendingPathComponent("groups")
+                let kpURL = projectURL!.appendingPathComponent("kp")
+            
+                //делаем директорию проекта
+                do{
+                    try FileManager.default.createDirectory(atPath: projectURL!.path, withIntermediateDirectories: true, attributes: nil)
+                
+                }catch let error as NSError{
+                
+                    print("Unable to create directory",error)
+                }
+                        
+                //вызываем функцию сохпранения всяких штук проекта
+                MatchingAlgorithmsBridge().writeGroups(grURL)
+                MatchingAlgorithmsBridge().writeKeypoints(kpURL)
+
+                //сохраняем картинку
+            
+                do {
+                    try data.write(to: photoURL)
+                } catch {
+                    print("error savind photo")
+                }
+                
+                let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpVCid") as! PopUpViewController
+                popUpVC.text = "Успешно сохранено"
+                self.addChild(popUpVC)
+                popUpVC.view.frame = self.view.frame
+                self.view.addSubview(popUpVC.view)
+                
+                popUpVC.didMove(toParent: self)
+            }
+            
+        //eсли длина 0 то не сохраняем
+        } else {
+            
+            let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpVCid") as! PopUpViewController
+            popUpVC.text = "Введите имя файла"
+            self.addChild(popUpVC)
+            popUpVC.view.frame = self.view.frame
+            self.view.addSubview(popUpVC.view)
+            
+            popUpVC.didMove(toParent: self)
+        }
+    }
     
-    //переменная для передачи картинки из первого окна
-    var newImage: UIImage!
     
-    //окно картинки с кейпоинтсами
-    @IBOutlet weak var ImageWithKeypoints: UIImageView!
+    //функция проверки уникальноости файла
+    func check(name: String) -> Int
+    {
+        do {
+            let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let directoryContents = try FileManager.default.contentsOfDirectory(at: documentURL, includingPropertiesForKeys: nil, options: [])
+            
+            let FileNames = directoryContents.map{ $0.deletingPathExtension().lastPathComponent }
+            
+            for fileName in FileNames {
+                if name == fileName {
+                    return 0
+                }
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+        
+        return 1
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ImageWithKeypoints.image = newImage
-        print(newImage.size)
+        
+        self.FileNameTextField.delegate = self
+        FileNameTextField.addTarget(self, action: #selector(myTargetFunction), for: .touchDown)
         
         //вызываем функцию поиска пездатых кейпоинтсов и получаем массив из них
         let pointer = MatchingAlgorithmsBridge().findBest(newImage)
 
         
-        //делаем массив нормальный бля
+        //делаем массив нормальный
         var array = Array(UnsafeBufferPointer(start: pointer, count: 20))
         
-        let heightInPoints = newImage.size.height
-
-        let widthInPoints = newImage.size.width
-        //get the frame of the square
-        
-        //edit square
-        print(ImageWithKeypoints.frame.size.width, ImageWithKeypoints.frame.size.height, "size of imageView")
-        print(ImageWithKeypoints.frame.origin.x, ImageWithKeypoints.frame.origin.y, "origin")
-        
-        print(array[0], array[1], "before")
-        for i in 0...19 {
-            if (i % 2 == 0) {
-                array[i] = Float(CGFloat(array[i]) * ImageWithKeypoints.frame.size.width / widthInPoints)
-            } else {
-                array[i] = Float(CGFloat(array[i]) * ImageWithKeypoints.frame.size.height / heightInPoints + 75)
-            }
+        for i in 0...9 {
+            array[2 * i + 1] = Float((3024 - CGFloat(array[2 * i + 1])) * 414 / 3024)
+            array[2 * i] = Float(ImageWithKeypoints.frame.origin.y + (CGFloat(array[2 * i])) * 552 / 4032)
+            print(array[2 * i + 1], array[2 * i])
+            
         }
-        print(array[0], array[1], "after")
+        
         //проходим по нему и создаем кнопки с нужными координатами
         for i in 0...9 {
             //создаем кнопку с координатами
-            makeButton(id: i, x: CGFloat(array[2 * i]), y: CGFloat(array[2 * i + 1]))
+            makeButton(id: i, x: CGFloat(array[2 * i + 1]), y: CGFloat(array[2 * i]))
         }
 
 
