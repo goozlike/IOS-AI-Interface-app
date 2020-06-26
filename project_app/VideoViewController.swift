@@ -47,7 +47,7 @@ class VideoViewController: UIViewController, UINavigationControllerDelegate, UII
         }
     }
     
-    //всякий калл для камеры в котором смысла особо нет
+    //настройки камеры
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
     private var captureSession: AVCaptureSession = AVCaptureSession()
