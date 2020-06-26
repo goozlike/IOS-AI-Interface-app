@@ -84,7 +84,7 @@ class SavedProjectsPickerViewController: UIViewController, UITextFieldDelegate {
         let pointer = MatchingAlgorithmsBridge().getCoords(0)
 
             
-        //делаем массив нормальный бля
+        //делаем массив
         var array = Array(UnsafeBufferPointer(start: pointer, count: 20))
             
         for i in 0...9 {
