@@ -19,5 +19,24 @@
 
 - (float *) findBest: (UIImage *) image;
 
-- (UIImage *) findAndDraw: (UIImage *) image : (int) num;
+- (UIImage *) match: (UIImage *) image : (int) num : (NSString *) text;
+
+-(void)work: (NSURL *) path : (int) size;
+
+-(void)writeGroups: (NSURL *) saveURL;
+
+-(void)readGroups: (NSURL*) saveURL;
+
+-(void)setText: (NSURL*) saveURL;
+
+-(void)writeKeypoints: (NSURL*) saveURL;
+
+-(void)readKeypoints: (NSURL*) saveURL;
+
+-(void)confirmProject: (int) r;
+
+- (float *) getCoords: (int) r;
+
+-(void) applPhoto: (UIImage *) image;
+
 @end
